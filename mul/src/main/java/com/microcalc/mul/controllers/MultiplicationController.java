@@ -18,8 +18,8 @@ public class MultiplicationController {
         Integer x, y, result;
 
         try{
-            x = Integer.parseInt((String) payload.get("x"));
-            y = Integer.parseInt((String) payload.get("y"));
+            x = (Integer) payload.get("x");
+            y = (Integer) payload.get("y");
         }catch(Exception e){
             e.printStackTrace();
             return ResponseEntity
