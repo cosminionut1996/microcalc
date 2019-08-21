@@ -1,3 +1,4 @@
-FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY www /var/www/html/
+FROM openjdk:8
+ADD target/fe.jar fe.jar
+EXPOSE 80
+ENTRYPOINT ["java", "-jar", "fe.jar"]
