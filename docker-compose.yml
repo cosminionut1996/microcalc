@@ -4,8 +4,8 @@ services:
   proxy:
     build: proxy
     container_name: proxy
-    ports: 
-      - 80:80
+    expose: 
+      - 9000
     restart: always
 
   add:
@@ -20,6 +20,13 @@ services:
     container_name: mul
     expose:
       - 8085
+    restart: always
+
+  fe:
+    build: fe
+    container_name: fe
+    ports:
+      - 80:80
     restart: always
 
   # div:
