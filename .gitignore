@@ -2,3 +2,4 @@ env
 .vscode
 *.egg*
 __pycache__
+.idea
