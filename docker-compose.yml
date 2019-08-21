@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+  proxy:
+    build: proxy
+    container_name: proxy
+    ports: 
+      - 80:80
+    restart: always
+
+  add:
+    build: add
+    container_name: add
+    expose:
+      - 80
+    restart: always
+
+  mul:
+    build: mul
+    container_name: mul
+    expose:
+      - 8085
+    restart: always
+
+  # div:
+  #   image: "cde"
+
+  # sub:
+  #   image: "bda"
