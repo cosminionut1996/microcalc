@@ -12,7 +12,7 @@ services:
     build: add
     container_name: add
     expose:
-      - 80
+      - 90
     restart: always
 
   mul:
@@ -20,6 +20,13 @@ services:
     container_name: mul
     expose:
       - 8085
+    restart: always
+
+  div:
+    build: div
+    container_name: div
+    expose:
+      - 80
     restart: always
 
   fe:
