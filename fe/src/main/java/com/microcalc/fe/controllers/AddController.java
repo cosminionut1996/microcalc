@@ -29,7 +29,7 @@ public class AddController {
         HttpPost httpPost = new HttpPost(URL);
         StringEntity stringEntity =new StringEntity(new JSONObject(payload).toString());
         httpPost.setEntity(stringEntity);
-        stringEntity.setContentType("applicaiton/json");
+        stringEntity.setContentType("application/json");
         HttpResponse response = httpClient.execute(httpPost);
 
         return ResponseEntity
