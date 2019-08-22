@@ -1,6 +1,8 @@
 package com.microcalc.fe.controllers;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.entity.ContentType;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -13,28 +15,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.swing.text.StringContent;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+import static com.sun.org.apache.xml.internal.serialize.OutputFormat.Defaults.Encoding;
+
 @Controller
 public class AddController {
     private static final String URL = "http://proxy:9000/add";
+
 
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public ResponseEntity add(@RequestBody Map<String, Object> payload) throws IOException {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost httpPost = new HttpPost(URL);
-        StringEntity stringEntity =new StringEntity(new JSONObject(payload).toString());
-        httpPost.setEntity(stringEntity);
-        stringEntity.setContentType("application/json");
-        HttpResponse response = httpClient.execute(httpPost);
+        StringEntity requestEntity = new StringEntity(
+                new JSONObject(payload).toString(),
+                ContentType.APPLICATION_JSON);
+        HttpPost postMethod = new HttpPost(URL);
+        postMethod.setEntity(requestEntity);
+
+        HttpResponse response = httpClient.execute(postMethod);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new JSONObject(response));
+                .body(EntityUtils.toString(response.getEntity()));
     }
 
 }

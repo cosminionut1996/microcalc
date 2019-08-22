@@ -130,26 +130,32 @@
   };
 
   function createPayload(x, y){
-    return {"x": x, "y": y};
+    return JSON.stringify({"x": x, "y": y});
   }
 
   function getResult(payload, operation){
     var url = address + operation;
     var result;
-    console.log("url: " + url);
-    console.log("Payload: " + payload);
 
     $.ajax({
       type: "POST",
       url: url,
+      async: false,
       data: payload,
+       headers: {'Accept': 'application/json',
+                 'Content-Type': 'application/json',
+                 'Access-Control-Allow-Origin': '*'
+                      },
       success: function(response){
+        console.log("Success:" + response['result']);
         result = response['result']
       },
-      dataType: function(response){
+      error: function(response){
+        console.log("Error: " + response);
         result = "Esti but rau!"
       }
     });
+
     return result;
   }
 
