@@ -4,7 +4,7 @@ services:
   proxy:
     build: proxy
     container_name: proxy
-    expose: 
+    expose:
       - 9000
     restart: always
 
@@ -12,7 +12,7 @@ services:
     build: add
     container_name: add
     expose:
-      - 90
+      - 80
     restart: always
 
   mul:
@@ -20,6 +20,13 @@ services:
     container_name: mul
     expose:
       - 8085
+    restart: always
+
+  sub:
+    build: sub
+    container_name: sub
+    expose:
+      - 80
     restart: always
 
   div:
@@ -35,9 +42,3 @@ services:
     ports:
       - 80:80
     restart: always
-
-  # div:
-  #   image: "cde"
-
-  # sub:
-  #   image: "bda"
