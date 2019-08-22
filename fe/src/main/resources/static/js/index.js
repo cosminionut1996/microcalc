@@ -20,7 +20,7 @@
     oldNum = "", // First number
     resultNum, // Result
     operator, // Batman
-    address = "http://proxy:9000/";
+    address = "http://localhost:80/";
 
   // When: Number is clicked. Get the current number selected
   var setNum = function() {
