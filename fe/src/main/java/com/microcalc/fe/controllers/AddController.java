@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Controller
@@ -27,10 +29,12 @@ public class AddController {
         HttpPost httpPost = new HttpPost(URL);
         StringEntity stringEntity =new StringEntity(new JSONObject(payload).toString());
         httpPost.setEntity(stringEntity);
+        stringEntity.setContentType("applicaiton/json");
         HttpResponse response = httpClient.execute(httpPost);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new JSONObject(response));
     }
+
 }
